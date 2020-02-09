@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculate</title>
+    <script src="vue.js"></script>
+    <style>
+        .btn {
+            background-color: lightgreen;
+            height: 40px;
+            width: 40px;
+            border-radius: 2px;
+            border: lime;
+        }
+        .row {
+            height: 40px;
+            background-color: lightsalmon;
+            padding-bottom: 5px;
+        }
+
+        .view {
+            height: 90px;
+            width: 300px;
+            border-radius: 2px;
+            border:2px solid lime;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id ="calculate">
+        <input type="text" class="view" v-bind:value="num1"> 
+        <div class="row">
+            <button class="btn" @click="btn1">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+        </div>
+        <div class="row">
+            <button class="btn"></button>
+            <input type="button">
+            <input type="button">
+        </div>
+        <div class="row">
+            <input type="button">
+            <input type="button">
+            <input type="button">
+        </div>
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: "#calculate",
+
+            data: {
+                num1: null
+            },
+
+            methods: {
+                btn1() {
+                    if(this.num1 == null) {
+                        this.num1 = "1"
+                        console.log(this.num1)
+                    }
+                    else {
+                        this.num1 = this.num1 + "1"
+                        console.log(this.num1)
+                    }    
+                },
+
+                btn2() {
+                    this.num1 = this.num1 + "2"
+                },
+
+                btn3() {
+                    this.num1 = this.num1 + "3"
+                },
+
+                btn4() {
+                    this.num1 = this.num1 + "4"
+                },
+
+                btn5() {
+                    this.num1 = this.num1 + "5"
+                },
+
+                btn6() {
+                    this.num1 = this.num1 + "6"
+                },
+
+                btn7() {
+                    this.num1 = this.num1 + "7"
+                },
+
+                btn8() {
+                    this.num1 = this.num1 + "8"
+                },
+
+                btn9() {
+                    this.num1 = this.num1 + "9"
+                },
+
+                btn0() {
+                    this.num1= this.num1 + "0"
+                },
+
+            }
+
+        })
+    </script>
+</body>
+</html>

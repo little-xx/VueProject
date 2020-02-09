@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .inner {
+            height: 70px;
+            background-color: lightpink;
+        }
+
+        .btn {
+            background-color: lightgreen;
+            height: 40px;
+            width: 40px;
+            border-radius: 2px;
+            border: lime;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="inner">
+        <div>
+            {{message}}
+        </div>
+        <div v-text="message"></div>
+        <div v-html="head"></div>
+        <input type="button" value="好的吧" v-bind:title="myTitle" v-on:click="show">
+        <input type="button" value="不渣" @click="badBoy">
+        <input type="button" value="渣" @click="notBad">
+    </div>
+
+    <div id="app2" class="inner">
+        <input type="button" value="haha" @click="showBtn">
+        <input type="text" v-model="something"><hr /><br />
+        <label>id:
+            <input type="text" v-model="id">
+        </label>
+        <label>name:
+            <input type="text" v-model="name">
+        </label>
+        <label>gender:
+            <input type="text" v-model="gender">
+        </label>
+
+        <input type="button" @click="addHero" class="btn">
+
+        <p v-for="item in SuperHero" :key="item.id">
+            <input type="checkbox">{{item.id}}---------{{item.name}}-------->{{item.gender}}
+        </p>
+    </div>
+
+    
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app2",
+            data: {
+                message: "我的心碎成了很多片，你得到其中的一片就应该满足了",
+                head: "<h1>我也太帅了吧</h1>",
+                myTitle: "你要是这么想我也没办法",
+                something: "我不吃你那一套，妹妹",
+                reallyBad: null,
+                IronMan: {
+                    id: 'Iron',
+                    name: 'TonyStack',
+                    gender: 'man'
+                },
+
+                id: "",
+
+                name: "",
+
+                gender: "",
+
+                SuperHero: [
+                    {id: 'Iron', name: 'TonyStack', gender: 'man'},
+                    {id: "Captain", name: "SmithJames", gender: "man"},
+                    {id: "BatMan", name:"StevenJobs", gender: "man"},
+                    {id: "ShaDiao", name:"ElongMask", gender: "woman"}
+                ]
+            },
+            methods: {
+                show() {
+                    alert("我不是渣男")
+                },
+
+                badBoy() {
+                    this.reallyBad = setInterval(() => {
+                        var start = this.message.substring(0, 1)
+                        var end = this.message.substring(1)
+                        this.message = end + start
+                    }, 100);
+                },
+
+                notBad() {
+                    clearInterval(this.reallyBad)
+                },
+
+                showBtn() {
+                    console.log("btnbtnbtn")
+                },
+
+                showDiv(){
+                    console.log("divdivdivdiv")
+                },
+
+                addHero() {
+                    this.SuperHero.unshift({id: this.id, name: this.name, gender: this.gender})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

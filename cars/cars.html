@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Audi Sport</title>
+    <link rel="icon" type="image/jpg" sizes="144x144" href="icon.jpg"/>
+    <script src="vue.js"></script>
+    <style>
+        #thd td {
+            padding-right: 70px;
+        }
+
+        .btn {
+            height: 38px;
+            width: 70px;
+            color: white;
+            font-size: 7px;
+            background-color: darkcyan;
+            border-radius: 2px;
+            border: 0px;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <label>Id:
+                <input type="text" v-model="id">
+            </label>
+
+            <label>Brand:
+                <input type="text" v-model="brand">
+            </label>
+
+            <label>Name:
+                <input type="text" v-model="name">
+            </label>
+
+            <label>Price:
+                <input type="text" v-model="price">
+            </label>
+
+            <input type="button" value="添加" class="btn" @click="add">
+
+            <label>查询
+                <input type="text" placeholder="请输入车名" v-model="keywords">
+            </label>
+        </div><hr/>
+
+        <table>
+            <thead id="thd">
+                <tr>
+                    <td>Id</td>
+                    <td>Brand</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Ctime</td>
+                    <td style="padding-left: 20px;">Operation</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keywords)" :key="item.id">
+                    <td v-text="item.id"></td>
+                    <td v-text="item.brand"></td>
+                    <td v-text="item.name"></td>
+                    <td v-text="item.price">price</td>
+                    <td v-text="item.ctime"></td>
+                    <td style="padding-left: 20px;">
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td style="padding-left: 20px;">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+                id: "",
+
+                name: "",
+
+                brand: "",
+
+                price: "",
+
+                keywords: "",
+
+                Cars: [
+                    {
+                        id: "1",
+                        brand: "Audi",
+                        name: "RS5",
+                        price: "87W",
+                        ctime: new Date(),
+                    },
+
+                    {
+                        id: "2",
+                        brand: "BMW",
+                        name: "M4",
+                        price: "88W",
+                        ctime: new Date(),
+                    },
+
+                    {
+                        id: "3",
+                        brand: "BENZ",
+                        name: "C63",
+                        price: "92W",
+                        ctime: new Date(),
+                    }
+                ]
+            },
+
+            methods: {
+                add() {
+                    this.Cars.push({id: this.id, brand: this.brand, name: this.name, price: this.price, ctime: new Date()})
+                },
+
+                del(id) {
+                    var index = this.Cars.findIndex(item => {
+                        if(item.id == id) {
+                            return true;
+                        }
+                    })
+                    this.Cars.splice(index, 1)
+                },
+
+                search(keywords) {
+                    var newList = []
+                    this.Cars.forEach(element => {
+                        if(element.name.indexOf(keywords) != -1)
+                            newList.push(element)
+                    })
+                    return newList
+                }
+            }
+        })
+    </script>
+</body>
+</html>
