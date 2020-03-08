@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        .tab ul {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        }
+
+        .tab ul li {
+        box-sizing: border-box;
+        padding: 0;
+        float: left;
+        width: 100px;
+        height: 45px;
+        line-height: 45px;
+        list-style: none;
+        text-align: center;
+        border-top: 1px solid blue;
+        border-right: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="tab">
+            <ul>
+                <li :key="item.id" v-for="(item, index) in cars" v-text="item.name"></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+
+        data: {
+            cars: [{
+                id: 1,
+                name: "Audi R8",
+                path: "image/AudiR8.jpg"
+            },{
+                id: 2,
+                name: "Porsche 911 Turbo",
+                path: "Porsche911.jpg"
+            },{
+                id: 3,
+                name: "Mclaren720s",
+                path: "image/720s"
+            }]
+
+        },
+
+        method: {
+
+        }
+    })
+</script>
+</html>
