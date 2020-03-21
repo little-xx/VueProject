@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyAuto</title>
+    <script src="vue.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <div>
+                Name:<input type="text">
+            </div>
+            <div>
+                <span>Sex:</span>
+                <input type="radio" id="male">
+                <label for="male">male</label>
+                <input type="radio" id="female">
+                <label for="female">female</label>
+            </div>
+            <div>
+                <span>Hobby:</span>
+                <input type="checkbox" id="ball">
+                <label for="ball">Basketball</label>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        
+        data: {
+
+        },
+
+        methods: {
+            
+        }
+    })
+</script>
+</html>

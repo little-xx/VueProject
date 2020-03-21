@@ -7,22 +7,36 @@
     <script src="vue.js"></script>
     <style>
         .tab ul {
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
         }
 
         .tab ul li {
-        box-sizing: border-box;
-        padding: 0;
-        float: left;
-        width: 100px;
-        height: 45px;
-        line-height: 45px;
-        list-style: none;
-        text-align: center;
-        border-top: 1px solid blue;
-        border-right: 1px solid blue;
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+        }
+        
+        .tab ul li.active {
+            background-color:greenyellow;
+        }
+
+        .tab div {
+            height: 500px;
+            width: 800px;
+            display: none;
+        }
+
+        .tab div.current { 
+            display: block;
         }
     </style>
 </head>
@@ -30,8 +44,11 @@
     <div id="app">
         <div class="tab">
             <ul>
-                <li :key="item.id" v-for="(item, index) in cars" v-text="item.name"></li>
+                <li @click="changeCurrentIndex(index)" :class='currentIndex==index ? "active" : ""' :key="item.id" v-for="(item, index) in cars" v-text="item.name"></li>
             </ul>
+            <div :key="item.id" @click="changeCurrentIndex(index)" :class='currentIndex==index ? "current" : ""' v-for="(item, index) in cars">
+                <img :src="item.path">
+            </div>
         </div>
         
     </div>
@@ -42,6 +59,8 @@
         el: "#app",
 
         data: {
+            currentIndex: 0,
+
             cars: [{
                 id: 1,
                 name: "Audi R8",
@@ -49,17 +68,19 @@
             },{
                 id: 2,
                 name: "Porsche 911 Turbo",
-                path: "Porsche911.jpg"
+                path: "image/Porsche911.jpg"
             },{
                 id: 3,
                 name: "Mclaren720s",
-                path: "image/720s"
+                path: "image/720s.jpg"
             }]
 
         },
 
-        method: {
-
+        methods: {
+            changeCurrentIndex(index) {
+                this.currentIndex = index
+            }
         }
     })
 </script>
