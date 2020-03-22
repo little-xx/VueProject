@@ -13,7 +13,7 @@
     <div id="app">
         <form>
             <div>
-                Name:<input type="text">
+                Name:<input type="text" v-focus>
             </div>
             <div>
                 <span>Sex:</span>
@@ -24,13 +24,40 @@
             </div>
             <div>
                 <span>Hobby:</span>
+                <input type="checkbox" id="sing">
+                <label for="sing">Sing</label>
+                <input type="checkbox" id="dance">
+                <label for="dance">Dance</label>
+                <input type="checkbox" id="rap">
+                <label for="rap">Rap</label>
                 <input type="checkbox" id="ball">
-                <label for="ball">Basketball</label>
+                <label for="ball">Ball</label>
+            </div>
+            <div>
+                <span>Program:</span>
+                <select>
+                    <option value="drain">Drain</option>
+                    <option value="gas">Gas</option>
+                    <option value="bridge">Bridge</option>
+                    <option value="subway">Subway</option>
+                    <option value="lift">Lift</option>
+                </select>
+            </div>
+            <div>
+                <span>Profile:</span>
+                <textarea></textarea>
             </div>
         </form>
     </div>
 </body>
-<script>
+<script type="text/javascript">
+
+    Vue.directive('focus', {
+        inserted: function(el){
+           el.focus();
+        }
+    });
+
     var vm = new Vue({
         el: '#app',
         
