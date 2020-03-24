@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drain</title>
+    <style>
+        #table-1 thead, #table-1 tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: darkcyan;
+        }
+        #table-1 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: darkcyan;
+        }
+
+        /* Padding and font style */
+        #table-1 td, #table-1 th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: lightpink;
+        }
+
+        /* Alternating background colors */
+        #table-1 tr:nth-child(even) {
+            background: #ffffff;
+        }
+        #table-1 tr:nth-child(odd) {
+            background: #6495ed;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table id="table-1">
+            <thead>
+                <tr>
+                    <td>Index</td>
+                    <td>Pipeline_Id</td>
+                    <td>Pipeline_Name</td>
+                    <td>Road_Name</td>
+                    <td>Pipeline_Length</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in pipeline">
+                    <td v-text="index+1"></td>
+                    <td v-text="item.Pipeline_Id"></td>
+                    <td v-text="item.Pipeline_Name"></td>
+                    <td v-text="item.Road_Name"></td>
+                    <td v-text="item.Pipeline_Length"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+<script src="vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+
+        data: {
+            pipeline: [
+                {Pipeline_Id: "YS0001", Pipeline_Name: "雨水", Road_Name: "习友路", Pipeline_Length: "50"},
+                {Pipeline_Id: "ZS0002", Pipeline_Name: "中水", Road_Name: "慈光路", Pipeline_Length: "50"},
+                {Pipeline_Id: "YS0003", Pipeline_Name: "雨水", Road_Name: "海恒路", Pipeline_Length: "50"},
+                {Pipeline_Id: "WS0004", Pipeline_Name: "污水", Road_Name: "宿松路", Pipeline_Length: "50"},
+                {Pipeline_Id: "YS2343", Pipeline_Name: "雨水", Road_Name: "繁华大道", Pipeline_Length: "50"},
+                {Pipeline_Id: "ZS6735", Pipeline_Name: "中水", Road_Name: "翡翠路", Pipeline_Length: "50"},
+                {Pipeline_Id: "WS4252", Pipeline_Name: "污水", Road_Name: "九龙路", Pipeline_Length: "50"},
+            ]
+        },
+
+        methods: {
+
+        }
+    })
+</script>
+</html>

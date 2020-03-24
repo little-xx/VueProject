@@ -55,6 +55,7 @@
         <div v-text="totalNumber()"></div>
         <div>{{date}}</div>
         <div>{{date | format}}</div>
+        <hello title="ahahahaha"></helloworld>
     </div>
 </body>
 <script type="text/javascript">
@@ -77,6 +78,35 @@
         ret += value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate();
         return ret;
     })
+
+    Vue.component('fine', {
+        props: [
+            'message'
+        ],
+
+        template: `
+            <button v-text="message"></button>
+        `
+    })
+
+    Vue.component('hello', {
+        data: function(){
+            return {msg: "Hello World"};
+        },
+
+        props: [
+            'title'
+        ],
+
+        template: `
+            <div>
+                <span>{{msg}}</span>
+                <span>{{title}}</span>
+                <fine message="I Love You"></fine>
+            </div>
+        `
+    })
+    
 
     var vm = new Vue({
         el: '#app',
