@@ -55,8 +55,16 @@
         <div v-text="totalNumber()"></div>
         <div>{{date}}</div>
         <div>{{date | format}}</div>
-        <hello title="ahahahaha"></helloworld>
-    </div>
+        <hello :title="name" :name="namePool" @push-name="pushName"></hello>
+        <Tom>
+            <button slot="haha">hahahahah</button>
+            <input type="text" value="nizhenshitaishuaile" slot="xixi">
+            <template v-slot:lalala="wtf">
+                {{wtf}}
+            </template>
+        </Tom>
+        <Jerry></Jerry>
+    </div> 
 </body>
 <script type="text/javascript">
 
@@ -91,20 +99,83 @@
 
     Vue.component('hello', {
         data: function(){
-            return {msg: "Hello World"};
+            return {msg: "Hello World", text: "I love you very much"};
         },
 
         props: [
-            'title'
+            'title', 'name'
         ],
 
         template: `
             <div>
                 <span>{{msg}}</span>
                 <span>{{title}}</span>
-                <fine message="I Love You"></fine>
+                <fine :message="text"></fine>
+                <ul>
+                    <li :key="index" v-text = "item" v-for="(item, index) in name"></li>
+                </ul>
+                <button @click='$emit("push-name")'>PushName</button>
             </div>
         `
+    })
+
+    var eventHub = new Vue()
+
+    Vue.component('Tom', {
+        data: function() {
+            return {
+                num: 0, info: {love: "basketball", like:"football"}
+            }
+        },
+
+        template: `
+            <div>
+                <slot name="xixi"></slot>
+                <slot name="haha"></slot>
+                <div>Tom: {{num}}</div>
+                <button @click="handle">woshinidie</button>
+                <slot :fav="info" :haha="num" name="lalala">{{info.love}}</slot>
+            </div>
+        `,
+
+        methods: {
+            handle() {
+                eventHub.$emit('jerry-event', 2);
+            }
+        },
+
+        mounted: function() {
+            eventHub.$on('tom-event', (val) => {
+                this.num += val;
+            })
+        }
+    })
+
+    Vue.component('Jerry', {
+        data: function() {
+            return {
+                num: 0
+            }
+        },
+        
+        template:`
+            <div>
+                <div>Jerry: {{num}}</div>
+                <button @click="handle">woshinidaye</button>    
+            </div>
+        `,
+
+        methods: {
+            handle() {
+                eventHub.$emit('tom-event', 1)
+            }
+        },
+
+        mounted: function(val) {
+            eventHub.$on('jerry-event', (val) => {
+                this.num += val;
+            })
+        }
     })
     
 
@@ -143,6 +214,10 @@
                         that.tip = "User name already exists";
                     }
                 },2000)
+            },
+
+            pushName() {
+                this.namePool.push("Jay Chou");
             }
         },
 
