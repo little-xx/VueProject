@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+    
+</body>
+<script type="text/javascript">
+    function queryData(url) {
+        var p = new Promise(function(resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if(request.readyState != 4) return;
+                if((request.readyState == 4) && (request.status == 200)) {
+                    resolve(request);
+                } else {
+                    reject("xixixixixi");
+                }
+            }
+            request.open("get", url);
+            request.send();
+        })
+        return p;
+    }
+
+    queryData('http://localhost:8081/hello').then(
+        function(data) {
+            console.log(data);
+            return queryData('http://localhost:8081/hello');
+        }
+    )
+    .then(function(data1) {
+        console.log(data);
+        return queryData('http://localhost:8081/hello');
+    })
+</script>
+</html>
